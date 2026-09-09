@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://easyjwt.sourcastic.dev/sitemap.xml

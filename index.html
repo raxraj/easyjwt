@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; worker-src 'self'; manifest-src 'self'; form-action 'none'; frame-ancestors 'none'">
+  <title>easyjwt — Private JWT Decoder & Security Linter</title>
+  <meta name="description" content="Decode, inspect, lint, verify, and locally sign JWTs in your browser. No tracking, no uploads, no servers.">
+  <link rel="canonical" href="https://easyjwt.sourcastic.dev/"><link rel="stylesheet" href="styles.css">
+  <meta property="og:title" content="easyjwt — Private JWT Decoder"><meta property="og:description" content="JWT diagnostics that keep tokens in your browser."><meta property="og:type" content="website"><meta property="og:url" content="https://easyjwt.sourcastic.dev/">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"easyjwt","applicationCategory":"DeveloperApplication","operatingSystem":"Any","description":"A privacy-first browser-only JWT decoder and security linter."}</script>
+</head>
+<body>
+<header><a class="brand" href="./">easy<span>jwt</span><small>by sourcastic.dev</small></a><nav><a href="guide.html">JWT guide</a><a href="security.html">Security model</a><a href="privacy.html">Privacy</a></nav></header>
+<main>
+  <section class="hero"><p class="eyebrow">ZERO-TRUST JWT DIAGNOSTICS</p><h1>Inspect tokens.<br><em>Keep them yours.</em></h1><p>Decode, lint, verify, and re-sign JSON Web Tokens entirely in your browser. No uploads. No accounts. No trackers.</p><p id="isolation" class="isolation" aria-live="polite">CSP isolation active · checking local service worker</p></section>
+  <section class="tool" aria-label="JWT decoder">
+    <label for="token">Paste a compact signed JWT <span>Nothing leaves this tab</span></label>
+    <textarea id="token" spellcheck="false" autocomplete="off" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9…"></textarea>
+    <div class="actions"><button id="decode" class="primary">Decode locally</button><button id="reset" class="quiet">Clear all</button><output id="action-status" class="status" aria-live="polite"></output></div>
+    <aside id="jwe-note" class="notice" hidden>This is a five-part JWE (encrypted JWT). easyjwt reads signed, three-part JWS tokens only; a JWE needs the decryption key and a dedicated decryption workflow.</aside>
+  </section>
+  <section id="results" hidden>
+    <div class="overview"><h2>Token inspection</h2><span id="alg-badge" class="badge"></span></div>
+    <div class="grid decoded">
+      <article class="panel"><div class="panel-title"><h3>Header</h3><button data-copy="#header-output">Copy</button></div><pre id="header-output"></pre></article>
+      <article class="panel"><div class="panel-title"><h3>Payload</h3><button data-copy="#payload-output">Copy</button></div><pre id="payload-output"></pre></article>
+      <article class="panel signature"><div class="panel-title"><h3>Signature</h3><button data-copy="#signature-output">Copy</button></div><pre id="signature-output"></pre></article>
+    </div>
+    <div class="grid lower"><section class="panel"><h2>Security linter</h2><div id="findings"></div></section><section class="panel"><h2>Token time</h2><div id="times" class="times"></div></section></div>
+    <section class="panel crypto"><h2>Verify or sign locally</h2><p class="muted">For HMAC, paste the shared secret. For RSA/ECDSA verification paste a public PEM; for signing paste a private PKCS#8 PEM. Key material remains in memory only.</p><textarea id="key-input" spellcheck="false" autocomplete="off" placeholder="Shared secret or PEM-formatted key"></textarea><div class="actions"><button id="verify">Verify signature</button></div>
+      <details><summary>Local token editor</summary><p class="muted">Edit only tokens you are authorized to use in local or mock environments.</p><div class="editor-grid"><label>Header<textarea id="header-editor" spellcheck="false"></textarea></label><label>Payload<textarea id="payload-editor" spellcheck="false"></textarea></label></div><label class="check"><input id="local-warning" type="checkbox"> I understand generated tokens are for authorized local/mock testing only.</label><button id="regenerate" class="primary">Generate signed token locally</button></details>
+    </section>
+  </section>
+  <section class="content-intro"><h2>A small tool for everyday auth debugging</h2><p>JWT payloads are Base64URL encoded—not secret. easyjwt turns a pasted token into an immediate security and time diagnostic without routing credentials through a third-party decoder.</p><div class="cards"><a href="guide.html"><strong>JWT security guide</strong><span>Understand claims, algorithms, and expiry.</span></a><a href="security.html"><strong>Technical model</strong><span>See exactly what the browser does—and does not—guarantee.</span></a><a href="privacy.html"><strong>Privacy promise</strong><span>No collection. No storage. No outbound token requests.</span></a></div></section>
+</main><footer>Made for developers by <a href="https://sourcastic.dev">sourcastic.dev</a> · Static, local, and deliberately boring about your data.</footer>
+<script type="module" src="app.js"></script>
+</body></html>
